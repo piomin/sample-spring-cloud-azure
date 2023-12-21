@@ -14,7 +14,8 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: pwd
+          - script: ls -la
+            displayName: 'Print'
           - script: cd microservices/account-service
             displayName: 'Go to the account-service'
           - script: pwd
