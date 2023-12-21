@@ -1,0 +1,30 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: A
+  jobs:
+  - deployment: Deploy 
+    environment:
+     name: 'demo'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: cd microservices/account-service
+            displayName: 'Go to the account-service'
+          - script: pwd
+          - task: Maven@3
+            inputs:
+              mavenPomFile: 'pom.xml'
+              mavenOptions: '-Xmx3072m'
+              javaHomeOption: 'JDKVersion'
+              jdkVersionOption: '1.17'
+              jdkArchitectureOption: 'x64'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              goals: 'package'
+            displayName: 'Build'
