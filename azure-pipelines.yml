@@ -20,8 +20,13 @@ stages:
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
       displayName: 'Build'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(System.DefaultWorkingDirectory)'
+        ArtifactName: 'app.jar'
 - stage: Deploy_Stage
   dependsOn: Build_Test
+  condition: succeeded()
   jobs:
     - deployment: Deployment_Staging
       environment:
@@ -30,6 +35,11 @@ stages:
         runOnce:
           deploy:
             steps:
+            - task: DownloadBuildArtifacts@1
+              inputs:
+                downloadType: 'single'
+                artifactName: 'app.jar'
+                downloadPath: '$(Pipeline.Workspace)'
             - task: AzureSpringCloud@0
               inputs:
                 azureSubscription: $(subscription)
@@ -37,4 +47,4 @@ stages:
                 AzureSpringCloud: $(serviceName)
                 AppName: 'account-service'
                 DeploymentName: envv2
-                Package: 'microservices/account-service/target/*.jar'
+                Package: 'app.jar'
