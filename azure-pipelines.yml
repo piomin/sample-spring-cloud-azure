@@ -5,9 +5,9 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Build-Test
+- stage: Build_Test
   jobs:
-  - job: Maven-Package
+  - job: Maven_Package
     steps:
     - task: Maven@3
       inputs:
@@ -20,10 +20,10 @@ stages:
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
       displayName: 'Build'
-- stage: Deploy-Stage
-  dependsOn: Build-Test
+- stage: Deploy_Stage
+  dependsOn: Build_Test
   jobs:
-    - deployment: Deployment-Staging
+    - deployment: Deployment_Staging
       environment:
         name: demo 
       strategy:
