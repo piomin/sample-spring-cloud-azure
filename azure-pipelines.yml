@@ -11,7 +11,7 @@ stages:
     steps:
     - task: Maven@3
       inputs:
-        mavenPomFile: 'microservices/pom.xml'
+        mavenPomFile: 'microservices/account-service/pom.xml'
         mavenOptions: '-Xmx3072m'
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
