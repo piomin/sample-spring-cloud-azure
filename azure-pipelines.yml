@@ -18,7 +18,7 @@ stages:
         jdkArchitectureOption: 'x64'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        goals: 'deploy'
+        goals: 'package'
         mavenAuthenticateFeed: true
       displayName: 'Build'
 - stage: Deploy_Stage
