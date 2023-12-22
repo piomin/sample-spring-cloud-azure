@@ -12,6 +12,7 @@ stages:
     - task: MavenAuthenticate@0
       inputs:
         artifactsFeeds: 'pminkows'
+        mavenServiceConnections: 'pminkows'
       displayName: 'Maven Authenticate'
     - task: Maven@3
       inputs:
