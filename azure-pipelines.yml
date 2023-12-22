@@ -24,6 +24,7 @@ stages:
       inputs:
         PathtoPublish: '$(System.DefaultWorkingDirectory)'
         ArtifactName: 'app.jar'
+        TargetPath: 'microservices/account-service/*.jar'
 - stage: Deploy_Stage
   dependsOn: Build_Test
   condition: succeeded()
