@@ -37,11 +37,14 @@ stages:
         runOnce:
           deploy:
             steps:
-            - task: DownloadBuildArtifacts@1
+            - task: DownloadPackage@1
               inputs:
-                downloadType: 'single'
-                artifactName: 'app.jar'
-                downloadPath: '$(Pipeline.Workspace)'
+                packageType: 'maven'
+                feed: '/32bf0e7d-d406-4f23-b312-70c68c3d27a0'
+                view: 'df8f0d5a-2e70-4e64-a21b-5bd592dec88f'
+                definition: '59ff6956-2828-408d-955d-dfe0b62838b9'
+                version: '1.0-snapshot'
+                downloadPath: '$(System.ArtifactsDirectory)'
             - task: AzureSpringCloud@0
               inputs:
                 azureSubscription: $(subscription)
@@ -49,4 +52,4 @@ stages:
                 AzureSpringCloud: $(serviceName)
                 AppName: 'account-service'
                 DeploymentName: envv2
-                Package: 'app.jar'
+                Package: '$(System.ArtifactsDirectory)/account-service.jar'
