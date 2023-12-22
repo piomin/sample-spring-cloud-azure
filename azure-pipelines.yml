@@ -5,9 +5,9 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: A
+- stage: Build-Test
   jobs:
-  - job: Deploy 
+  - job: Maven-Package
     steps:
     - task: Maven@3
       inputs:
@@ -20,3 +20,20 @@ stages:
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
       displayName: 'Build'
+- stage: Deploy-Stage
+  dependsOn: Build-Test
+  jobs:
+    - deployment: Deployment-Staging
+      environment:
+        name: demo 
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - task: AzureSpringCloud@0
+              inputs:
+                azureSubscription: $(subscription)
+                Action: 'Deploy'
+                AzureSpringCloud: $(serviceName)
+                AppName: 'account-service'
+                DeploymentName: envv2
