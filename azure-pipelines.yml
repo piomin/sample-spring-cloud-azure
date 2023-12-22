@@ -45,6 +45,7 @@ stages:
                 definition: '59ff6956-2828-408d-955d-dfe0b62838b9'
                 version: '1.0-snapshot'
                 downloadPath: '$(System.ArtifactsDirectory)'
+            - script: 'ls -la $(System.ArtifactsDirectory)' 
             - task: AzureSpringCloud@0
               inputs:
                 azureSubscription: $(subscription)
