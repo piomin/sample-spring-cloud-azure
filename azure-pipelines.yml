@@ -37,3 +37,4 @@ stages:
                 AzureSpringCloud: $(serviceName)
                 AppName: 'account-service'
                 DeploymentName: envv2
+                Package: 'microservices/account-service/target/*.jar'
