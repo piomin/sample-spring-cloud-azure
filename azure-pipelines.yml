@@ -9,6 +9,10 @@ stages:
   jobs:
   - job: Maven_Package
     steps:
+    - task: MavenAuthenticate@0
+      inputs:
+        artifactsFeeds: 'pminkows'
+      displayName: 'Maven Authenticate'
     - task: Maven@3
       inputs:
         mavenPomFile: 'microservices/account-service/pom.xml'
