@@ -18,13 +18,9 @@ stages:
         jdkArchitectureOption: 'x64'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        goals: 'package'
+        goals: 'deploy'
+        mavenAuthenticateFeed: true
       displayName: 'Build'
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(System.DefaultWorkingDirectory)'
-        ArtifactName: 'app.jar'
-        TargetPath: 'microservices/account-service/*.jar'
 - stage: Deploy_Stage
   dependsOn: Build_Test
   condition: succeeded()
