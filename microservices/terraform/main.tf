@@ -46,13 +46,31 @@ resource "azurerm_cosmosdb_sql_container" "sample-db-container" {
   database_name         = azurerm_cosmosdb_sql_database.sample-db.name
   partition_key_path    = "/customerId"
   partition_key_version = 1
-  throughput            = 100
+  throughput            = 400
+}
+
+data "azurerm_client_config" "data" {}
+
+resource "azurerm_role_assignment" "app_configuration_role" {
+  scope                = azurerm_resource_group.spring-group.id
+  role_definition_name = "App Configuration Data Owner"
+  principal_id         = data.azurerm_client_config.data.object_id
+}
+
+resource "time_sleep" "role_assignment_sleep" {
+  create_duration = "60s"
+
+  triggers = {
+    role_assignment = azurerm_role_assignment.app_configuration_role.id
+  }
 }
 
 resource "azurerm_app_configuration" "sample-config" {
   name                = "sample-spring-cloud-config"
   resource_group_name = azurerm_resource_group.spring-group.name
   location            = azurerm_resource_group.spring-group.location
+
+  depends_on = [azurerm_role_assignment.app_configuration_role, time_sleep.role_assignment_sleep]
 }
 
 resource "azurerm_app_configuration_key" "cosmosdb-key" {
@@ -61,13 +79,13 @@ resource "azurerm_app_configuration_key" "cosmosdb-key" {
   value                  = azurerm_cosmosdb_account.sample-db-account.primary_key
 }
 
-resource "azurerm_app_configuration_key" "cosmosdb-key" {
+resource "azurerm_app_configuration_key" "cosmosdb-database" {
   configuration_store_id = azurerm_app_configuration.sample-config.id
   key                    = "/application/spring.cloud.azure.cosmos.database"
   value                  = "sampledb"
 }
 
-resource "azurerm_app_configuration_key" "cosmosdb-key" {
+resource "azurerm_app_configuration_key" "cosmosdb-endpoint" {
   configuration_store_id = azurerm_app_configuration.sample-config.id
   key                    = "/application/spring.cloud.azure.cosmos.endpoint"
   value                  = azurerm_cosmosdb_account.sample-db-account.endpoint
@@ -114,7 +132,7 @@ resource "azurerm_spring_cloud_java_deployment" "slot-staging" {
   runtime_version     = "Java_17"
 
   quota {
-    cpu    = "0.5"
+    cpu    = "500m"
     memory = "1Gi"
   }
 
