@@ -138,7 +138,7 @@ resource "azurerm_spring_cloud_java_deployment" "slot-staging" {
 
   environment_variables = {
     "Env" : "Staging",
-    "APP_CONFIGURATION_CONNECTION_STRING": azurerm_app_configuration.sample-config.endpoint
+    "APP_CONFIGURATION_CONNECTION_STRING": azurerm_app_configuration.sample-config.primary_read_key.connection_string
   }
 }
 

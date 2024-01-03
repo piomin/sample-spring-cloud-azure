@@ -8,6 +8,7 @@
     </parent>
 
     <artifactId>account-service</artifactId>
+    <version>1.0</version>
 
     <dependencies>
         <dependency>
