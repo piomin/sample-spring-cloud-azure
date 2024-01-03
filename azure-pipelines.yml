@@ -32,7 +32,7 @@ stages:
   jobs:
     - deployment: Deployment_Staging
       environment:
-        name: demo 
+        name: staging
       strategy:
         runOnce:
           deploy:
@@ -40,10 +40,10 @@ stages:
             - task: DownloadPackage@1
               inputs:
                 packageType: 'maven'
-                feed: '/32bf0e7d-d406-4f23-b312-70c68c3d27a0'
-                view: 'df8f0d5a-2e70-4e64-a21b-5bd592dec88f'
+                feed: 'pminkows'
+                view: 'Local'
                 definition: '59ff6956-2828-408d-955d-dfe0b62838b9'
-                version: '1.0-snapshot'
+                version: '1.0'
                 downloadPath: '$(System.ArtifactsDirectory)'
             - script: 'ls -la $(System.ArtifactsDirectory)' 
             - task: AzureSpringCloud@0
@@ -52,5 +52,5 @@ stages:
                 Action: 'Deploy'
                 AzureSpringCloud: $(serviceName)
                 AppName: 'account-service'
-                DeploymentName: envv2
+                DeploymentName: dep1
                 Package: '$(System.ArtifactsDirectory)/account-service.jar'
