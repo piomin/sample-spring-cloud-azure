@@ -43,7 +43,7 @@ stages:
                 feed: 'pminkows'
                 view: 'Local'
                 definition: 'pl.piomin:account-service'
-                version: '1.0'
+                version: '1.1'
                 downloadPath: '$(System.ArtifactsDirectory)'
             - script: 'ls -la $(System.ArtifactsDirectory)' 
             - task: AzureSpringCloud@0
@@ -53,4 +53,4 @@ stages:
                 AzureSpringCloud: $(serviceName)
                 AppName: 'account-service'
                 DeploymentName: dep1
-                Package: '$(System.ArtifactsDirectory)/account-service-1.0.jar'
+                Package: '$(System.ArtifactsDirectory)/account-service-1.1.jar'
