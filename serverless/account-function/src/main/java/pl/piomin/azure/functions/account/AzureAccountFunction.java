@@ -36,10 +36,12 @@ public class AzureAccountFunction {
     private FunctionCatalog functionCatalog;
 
     @FunctionName("addAccount")
-    public Account addAccountFunc(@HttpTrigger(name = "req",
-                                               methods = { HttpMethod.POST },
-                                               authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
-                                  ExecutionContext context) {
+    public Account addAccountFunc(
+            @HttpTrigger(name = "req",
+                         methods = { HttpMethod.POST },
+                         authLevel = AuthorizationLevel.ANONYMOUS)
+            HttpRequestMessage<Optional<String>> request,
+            ExecutionContext context) {
 //        Function func = functionCatalog.lookup("addAccount");
         String body = request.getBody().orElseThrow();
         context.getLogger().info("Msg: " + body);
@@ -47,9 +49,14 @@ public class AzureAccountFunction {
     }
 
     @FunctionName("newAccountEvent")
-    public void newAccountEventFunc(@EventHubTrigger(eventHubName = "accounts",
-                                                 name = "spring-cloud-serverless",
-                                                 connection = "") String message) {
+    public void newAccountEventFunc(
+            @EventHubTrigger(eventHubName = "accounts",
+                             dataType = "string",
+                             name = "events",
+                             connection = "AzureWebJobsEventHubSender")
+            String message,
+            ExecutionContext context) {
+        context.getLogger().info("Event: " + message);
         printAccount.accept(new Account());
     }
 }
