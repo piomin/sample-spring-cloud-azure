@@ -11,12 +11,15 @@
 
     <modules>
         <module>microservices</module>
+        <module>serverless</module>
+        <module>serverless/account-function</module>
     </modules>
 
     <properties>
         <java.version>17</java.version>
         <spring-boot.version>3.1.4</spring-boot.version>
         <spring-cloud-azure.version>5.7.0</spring-cloud-azure.version>
+        <spring-cloud.version>2022.0.4</spring-cloud.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -24,6 +27,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>com.azure.spring</groupId>
                 <artifactId>spring-cloud-azure-dependencies</artifactId>
@@ -57,18 +67,18 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>pminkows</id>
-            <url>https://pkgs.dev.azure.com/pminkows/_packaging/pminkows/Maven/v1</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>pminkows</id>-->
+<!--            <url>https://pkgs.dev.azure.com/pminkows/_packaging/pminkows/Maven/v1</url>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
     <distributionManagement>
         <repository>
