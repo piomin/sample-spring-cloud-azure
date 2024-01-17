@@ -3,10 +3,8 @@ package pl.piomin.azure.functions.account;
 import com.microsoft.azure.functions.ExecutionContext;
 import com.microsoft.azure.functions.HttpMethod;
 import com.microsoft.azure.functions.HttpRequestMessage;
-import com.microsoft.azure.functions.annotation.AuthorizationLevel;
-import com.microsoft.azure.functions.annotation.EventHubTrigger;
-import com.microsoft.azure.functions.annotation.FunctionName;
-import com.microsoft.azure.functions.annotation.HttpTrigger;
+import com.microsoft.azure.functions.OutputBinding;
+import com.microsoft.azure.functions.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,8 @@ import java.util.function.Supplier;
 
 @SpringBootApplication
 public class AzureAccountFunction {
+
+    private static final Logger LOG = LoggerFactory.getLogger(AzureAccountFunction.class);
 
     public static void main(String[] args) {
         SpringApplication.run(AzureAccountFunction.class, args);
@@ -51,12 +51,13 @@ public class AzureAccountFunction {
     @FunctionName("newAccountEvent")
     public void newAccountEventFunc(
             @EventHubTrigger(eventHubName = "accounts",
-                             dataType = "string",
                              name = "events",
-                             connection = "AzureWebJobsEventHubSender")
-            String message,
-            ExecutionContext context) {
-        context.getLogger().info("Event: " + message);
+                             connection = "AzureWebJobsEventHubSender",
+                             cardinality = Cardinality.MANY)
+            String message) {
+        LOG.info("Msg-Event: {}", message);
+//        context.getLogger().info("Event: " + message);
+//        output.setValue(message);
         printAccount.accept(new Account());
     }
 }

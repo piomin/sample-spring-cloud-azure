@@ -11,5 +11,8 @@
 
     <artifactId>serverless</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>customer-function</module>
+    </modules>
 
 </project>

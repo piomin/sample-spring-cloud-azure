@@ -9,11 +9,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>account-function</artifactId>
+    <artifactId>customer-function</artifactId>
     <version>1.0</version>
 
     <properties>
-        <start-class>pl.piomin.azure.functions.account.AzureAccountFunction</start-class>
+        <start-class>pl.piomin.azure.functions.customer.AzureCustomerFunction</start-class>
     </properties>
 
     <dependencies>
@@ -64,7 +64,7 @@
                 <version>1.30.0</version>
 
                 <configuration>
-                    <appName>pminkows-account-function</appName>
+                    <appName>pminkows-customer-function</appName>
                     <resourceGroup>spring-cloud-serverless</resourceGroup>
                     <region>eastus</region>
                     <appServicePlanName>ASP-springcloudserverless-95c6</appServicePlanName>
@@ -98,4 +98,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
