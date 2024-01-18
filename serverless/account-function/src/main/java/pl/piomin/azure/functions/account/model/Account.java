@@ -1,16 +1,26 @@
 package pl.piomin.azure.functions.account.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Account {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String number;
     private Long customerId;
+    private int balance;
 
     public Account() {}
 
-    public Account(String number, Long customerId) {
+    public Account(String number, Long customerId, int balance) {
         this.number = number;
         this.customerId = customerId;
+        this.balance = balance;
     }
 
     public Long getId() {
@@ -37,12 +47,21 @@ public class Account {
         this.customerId = customerId;
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
                 "id=" + id +
                 ", number='" + number + '\'' +
                 ", customerId=" + customerId +
+                ", balance=" + balance +
                 '}';
     }
 }

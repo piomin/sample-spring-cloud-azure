@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.function.context.FunctionCatalog;
 import org.springframework.context.annotation.Bean;
 import pl.piomin.azure.functions.account.model.Account;
+import pl.piomin.azure.functions.account.model.Customer;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -29,35 +30,31 @@ public class AzureAccountFunction {
     }
 
     @Autowired
-    public Function<String, Account> addAccount;
-    @Autowired
-    public Consumer<Account> printAccount;
-    @Autowired
     private FunctionCatalog functionCatalog;
 
-    @FunctionName("addAccount")
-    public Account addAccountFunc(
-            @HttpTrigger(name = "req",
-                         methods = { HttpMethod.POST },
-                         authLevel = AuthorizationLevel.ANONYMOUS)
-            HttpRequestMessage<Optional<String>> request,
-            ExecutionContext context) {
-//        Function func = functionCatalog.lookup("addAccount");
-        String body = request.getBody().orElseThrow();
-        context.getLogger().info("Msg: " + body);
-        return addAccount.apply(body);
-    }
+//    @FunctionName("addAccount")
+//    public Account addAccountFunc(
+//            @HttpTrigger(name = "req",
+//                         methods = { HttpMethod.POST },
+//                         authLevel = AuthorizationLevel.ANONYMOUS)
+//            HttpRequestMessage<Optional<String>> request,
+//            ExecutionContext context) {
+////        Function func = functionCatalog.lookup("addAccount");
+//        String body = request.getBody().orElseThrow();
+//        context.getLogger().info("Msg: " + body);
+//        return addAccount.apply(body);
+//    }
 
-    @FunctionName("newAccountEvent")
+    @FunctionName("new-customer")
     public void newAccountEventFunc(
-            @EventHubTrigger(eventHubName = "accounts",
-                             name = "events",
-                             connection = "AzureWebJobsEventHubSender",
+            @EventHubTrigger(eventHubName = "customers",
+                             name = "newAccountTrigger",
+                             connection = "EVENT_HUBS_CONNECTION_STRING",
                              cardinality = Cardinality.MANY)
-            String message) {
-        LOG.info("Msg-Event: {}", message);
-//        context.getLogger().info("Event: " + message);
-//        output.setValue(message);
-        printAccount.accept(new Account());
+            Customer event,
+            ExecutionContext context) {
+        context.getLogger().info("Event: {}" + event);
+        Function<Customer, Account> function = functionCatalog.lookup("addAccount");
+        function.apply(event);
     }
 }
