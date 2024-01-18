@@ -71,7 +71,7 @@
                 <artifactId>azure-functions-maven-plugin</artifactId>
                 <version>1.30.0</version>
                 <configuration>
-                    <appName>pminkows-function</appName>
+                    <appName>pminkows-customer-function</appName>
                     <resourceGroup>spring-cloud-serverless</resourceGroup>
                     <region>eastus</region>
                     <appServicePlanName>EastUSLinuxDynamicPlan</appServicePlanName>

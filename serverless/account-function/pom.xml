@@ -75,28 +75,24 @@
                 <groupId>com.microsoft.azure</groupId>
                 <artifactId>azure-functions-maven-plugin</artifactId>
                 <version>1.30.0</version>
-
                 <configuration>
                     <appName>pminkows-account-function</appName>
                     <resourceGroup>spring-cloud-serverless</resourceGroup>
                     <region>eastus</region>
-                    <appServicePlanName>ASP-springcloudserverless-95c6</appServicePlanName>
-
+                    <appServicePlanName>EastUSLinuxDynamicPlan</appServicePlanName>
                     <hostJson>${project.basedir}/src/main/resources/host.json</hostJson>
-
                     <runtime>
                         <os>linux</os>
                         <javaVersion>17</javaVersion>
                     </runtime>
-
                     <appSettings>
                         <property>
                             <name>FUNCTIONS_EXTENSION_VERSION</name>
                             <value>~4</value>
                         </property>
                         <property>
-                            <name>AzureWebJobsEventHubSender</name>
-                            <value>Endpoint=sb://spring-cloud-serverless.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ZSFH9F3m8E449mG0uYy56q0Ml3beIbJQN+AEhIfMsBQ=</value>
+                            <name>EVENT_HUBS_CONNECTION_STRING</name>
+                            <value>${EVENT_HUBS_CONNECTION_STRING}</value>
                         </property>
                     </appSettings>
                 </configuration>

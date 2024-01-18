@@ -1,10 +1,6 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=pminkowsevents;AccountKey=00+0pDWEL8Wa2UsoRryJCPKAmzMfOZJRA307FIB06SybGtqB9L4z155WcTDkWsnkFajnOoeSetoO+AStSTtHAQ==;EndpointSuffix=core.windows.net",
-    "FUNCTIONS_WORKER_RUNTIME": "java",
-    "AzureWebJobsEventGridOutputBindingTopicUriString": "",
-    "AzureWebJobsEventGridOutputBindingTopicKeyString": "",
-    "AzureWebJobsEventHubSender": "Endpoint=sb://spring-cloud-serverless.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ZSFH9F3m8E449mG0uYy56q0Ml3beIbJQN+AEhIfMsBQ="
+    "FUNCTIONS_WORKER_RUNTIME": "java"
   }
 }

@@ -1,8 +1,6 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=pminkowsserverless;AccountKey=J/SInSJmwOzxpatHPMlHLKukSGdDLOAUnq7qqXzGtVO1CjoLXjBTM8QsACRH6oLZYVfl+Ysyl6x8+AStzuLMag==;EndpointSuffix=core.windows.net",
-    "FUNCTIONS_WORKER_RUNTIME": "java",
-    "EVENT_HUBS_CONNECTION_STRING": "Endpoint=sb://spring-cloud-serverless.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=TinMtql/Lie6L862dyNFHklJ3TfmLFo1f+AEhKirk1Y="
+    "FUNCTIONS_WORKER_RUNTIME": "java"
   }
 }

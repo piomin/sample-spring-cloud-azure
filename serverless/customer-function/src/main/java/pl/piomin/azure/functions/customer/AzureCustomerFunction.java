@@ -43,10 +43,10 @@ public class AzureCustomerFunction {
             @EventHubTrigger(eventHubName = "accounts",
                     name = "changeStatusTrigger",
                     connection = "EVENT_HUBS_CONNECTION_STRING",
-                    cardinality = Cardinality.MANY)
+                    cardinality = Cardinality.ONE)
             Account event,
             ExecutionContext context) {
-        context.getLogger().info("Event: {}" + event);
+        context.getLogger().info("Event: " + event);
         Consumer<Account> consumer = functionCatalog.lookup("changeStatus");
         consumer.accept(event);
     }
