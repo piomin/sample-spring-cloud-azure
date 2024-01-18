@@ -1,0 +1,8 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": ${STORAGE_ACC_CONNECTION_STRING},
+    "FUNCTIONS_WORKER_RUNTIME": "java",
+    "EVENT_HUBS_CONNECTION_STRING": ${EVENT_HUBS_CONNECTION_STRING}
+  }
+}

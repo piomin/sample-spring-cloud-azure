@@ -12,7 +12,6 @@
     <modules>
         <module>microservices</module>
         <module>serverless</module>
-        <module>serverless/account-function</module>
     </modules>
 
     <properties>

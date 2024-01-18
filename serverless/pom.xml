@@ -12,6 +12,7 @@
     <artifactId>serverless</artifactId>
     <packaging>pom</packaging>
     <modules>
+        <module>account-function</module>
         <module>customer-function</module>
     </modules>
 
