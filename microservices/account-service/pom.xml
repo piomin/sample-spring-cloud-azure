@@ -10,6 +10,10 @@
     <artifactId>account-service</artifactId>
     <version>1.3</version>
 
+    <properties>
+        <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

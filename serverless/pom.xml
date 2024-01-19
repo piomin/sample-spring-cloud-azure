@@ -11,6 +11,11 @@
 
     <artifactId>serverless</artifactId>
     <packaging>pom</packaging>
+
+    <properties>
+        <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
+    </properties>
+
     <modules>
         <module>account-function</module>
         <module>customer-function</module>
