@@ -44,7 +44,7 @@ resource "azurerm_cosmosdb_sql_container" "sample-db-container" {
   resource_group_name   = azurerm_cosmosdb_account.sample-db-account.resource_group_name
   account_name          = azurerm_cosmosdb_account.sample-db-account.name
   database_name         = azurerm_cosmosdb_sql_database.sample-db.name
-  partition_key_path    = "/customerId"
+  partition_key_paths   = ["/customerId"]
   partition_key_version = 1
   throughput            = 400
 }
@@ -138,7 +138,7 @@ resource "azurerm_spring_cloud_java_deployment" "slot-staging" {
 
   environment_variables = {
     "Env" : "Staging",
-    "APP_CONFIGURATION_CONNECTION_STRING": azurerm_app_configuration.sample-config.primary_read_key.connection_string
+    "APP_CONFIGURATION_CONNECTION_STRING": azurerm_app_configuration.sample-config.primary_read_key[0].connection_string
   }
 }
 
